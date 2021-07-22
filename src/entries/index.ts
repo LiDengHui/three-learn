@@ -1,3 +1,4 @@
+// @ts-ignore;
 const componentsContext = require.context('./', true, /.ts$/)
 const maps = []
 console.dir(componentsContext)
