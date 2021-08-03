@@ -1,0 +1,10 @@
+{
+  "prettier.typescriptEnable": [
+    "typescript",
+    "typescript",
+    "typescriptreact"
+  ],
+  "prettier.useTabs": false,
+  "prettier.requireConfig": true,
+  "prettier.tabWidth": 4
+}
