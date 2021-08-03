@@ -1,6 +1,7 @@
 // @ts-expect-error
 const componentsContext = require.context('./', true, /.ts$/);
 const maps = [];
+
 componentsContext.keys().forEach((filePath) => {
     // 获取文件中的 default 模块
     const filename = filePath.replace(
