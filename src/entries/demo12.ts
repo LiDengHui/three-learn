@@ -41,25 +41,25 @@ obgLoader.load('/obj/car/file.obj', (obj: THREE.Object3D) => {
 
     // obj.position.z = 100;
     commonObj.scene.add(obj);
-    const controls = new DragControls(
-        [obj],
-        commonObj.camera,
-        commonObj.renderer.domElement
-    );
-    controls.transformGroup = true;
-    controls.addEventListener('dragstart', function (event) {
-        console.log(event);
-        event.object;
-        controls.enabled = false;
-    });
+    // const controls = new DragControls(
+    //     [obj],
+    //     commonObj.camera,
+    //     commonObj.renderer.domElement
+    // );
+    // controls.transformGroup = true;
+    // controls.addEventListener('dragstart', function (event) {
+    //     console.log(event);
+    //     event.object;
+    //     controls.enabled = false;
+    // });
 
-    controls.addEventListener('drag', function (event) {
-        console.log(event.object.position);
-    });
-    controls.addEventListener('dragend', function (event) {
-        controls.enabled = true;
-        // event.object.material.emissive.set(0x000000);
-    });
+    // controls.addEventListener('drag', function (event) {
+    //     console.log(event.object.position);
+    // });
+    // controls.addEventListener('dragend', function (event) {
+    //     controls.enabled = true;
+    //     // event.object.material.emissive.set(0x000000);
+    // });
     render();
 });
 controls.enableDamping = true;
@@ -68,7 +68,9 @@ controls.update();
 function render() {
     requestAnimationFrame(render);
     car.position.z += 0.1;
-
+    if (car.position.z > 100) {
+        car.position.z = -100;
+    }
     controls.update();
     commonObj.renderer.render(commonObj.scene, commonObj.camera);
 }
