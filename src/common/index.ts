@@ -7,14 +7,14 @@ export function common() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
 
-    const planeGeometry = new THREE.PlaneGeometry(60, 30);
-    const planeMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
-    const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+    // const planeGeometry = new THREE.PlaneGeometry(60, 30);
+    // const planeMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
+    // const plane = new THREE.Mesh(planeGeometry, planeMaterial);
 
-    plane.rotation.x = -0.5 * Math.PI;
-    plane.position.set(15, 0, 0);
-    plane.receiveShadow = true;
-    scene.add(plane);
+    // plane.rotation.x = -0.5 * Math.PI;
+    // plane.position.set(15, 0, 0);
+    // plane.receiveShadow = true;
+    // scene.add(plane);
 
     const camera = new THREE.PerspectiveCamera(
         60,
@@ -24,7 +24,7 @@ export function common() {
     );
     return {
         scene,
-        plane,
+        // plane,
         renderer,
         camera,
     };

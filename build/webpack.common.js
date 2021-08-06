@@ -1,30 +1,30 @@
-const path = require('path')
-const glob = require('glob')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path');
+const glob = require('glob');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const entries = (function () {
     const entryFiles = glob.sync(
         path.join(__dirname, '../src/entries/') + '**/*.ts'
-    )
-    const map = {}
+    );
+    const map = {};
     entryFiles.forEach((filePath) => {
         const filename = filePath.replace(
             /.*\/(\w+)\/(\w+)(\.html|\.ts)$/,
             (rs, $1, $2) => $2
-        )
-        map[filename] = filePath
-    })
+        );
+        map[filename] = filePath;
+    });
 
-    return map
-})()
-console.log(entries)
+    return map;
+})();
+console.log(entries);
 const htmlPlugins = Object.keys(entries).map((key) => {
     return new HtmlWebpackPlugin({
         title: key,
         chunks: [key],
         filename: path.join(__dirname, '../dist', key + '.html'),
         template: path.resolve(__dirname, '../index.html'),
-    })
-})
+    });
+});
 module.exports = {
     entry: entries,
     resolve: {
@@ -38,6 +38,21 @@ module.exports = {
                 use: {
                     loader: 'swc-loader',
                 },
+            },
+            {
+                test: /\.gltf$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: { esModule: false },
+                    },
+                    '@vxna/gltf-loader',
+                ],
+            },
+            {
+                test: /\.(bin|jpe?g|png)$/,
+                loader: 'file-loader',
+                options: { esModule: false },
             },
         ],
     },
@@ -70,4 +85,4 @@ module.exports = {
         },
         runtimeChunk: { name: 'manifest' }, // 运行时代码
     },
-}
+};
