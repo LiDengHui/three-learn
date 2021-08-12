@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { initStates } from '../util/stats';
+import { initStates } from '../utils/stats';
 
 const stats = initStates();
 

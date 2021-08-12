@@ -13,18 +13,12 @@ const obgLoader = new OBJLoader();
 
 glTFLoader.load('/gltf/road/scene.gltf', (gltf) => {
     console.log(gltf);
-    gltf.scene.traverse(function (child: THREE.Object3D) {
-        //遍历子元素
-        if (child.isMesh) {
-        }
-    });
     commonObj.scene.add(gltf.scene);
     render();
 });
 let car = new THREE.Object3D();
 
 // add event listener to highlight dragged objects
-
 document.body.appendChild(commonObj.renderer.domElement);
 const controls = new OrbitControls(
     commonObj.camera,

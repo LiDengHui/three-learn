@@ -26,6 +26,8 @@ const titles = {
     demo09: '聚光灯',
     demo10: '方向光/太阳光',
     demo11: '半球光',
+    demo12: '隧道跑车',
+    demo13: 'ODC'
 };
 document.body.innerHTML = `
         <ul>
