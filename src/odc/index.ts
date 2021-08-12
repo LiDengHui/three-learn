@@ -1,7 +1,7 @@
-import {Camera, Color, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
-import {PlaneFactory} from './elements'
-import {HelpFactory} from "./utils/help-factory";
-import {BaseFactory} from "./interface/base-factory";
+import { Camera, Color, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
+import { HelpFactory } from './utils/help-factory';
+import { BaseFactory } from './interface/base-factory';
+import { FloorFactory } from './elements/floor/floor-factory';
 
 export class ODC {
     scene: Scene;
@@ -30,7 +30,7 @@ export class ODC {
     }
 
     initRenderer() {
-        const renderer = new WebGLRenderer({antialias: true});
+        const renderer = new WebGLRenderer({ antialias: true });
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
@@ -39,15 +39,15 @@ export class ODC {
 
     addElement() {
         this.elements.push(new HelpFactory(this.scene));
-
+        this.elements.push(new FloorFactory(this.scene, this.render.bind(this)));
         // this.elements.push(new PlaneFactory(this.scene));
     }
 
     update() {
-        this.elements.forEach((element) => element.update())
+        this.elements.forEach((element) => element.update());
     }
 
     render() {
-        this.renderer.render(this.scene, this.camera)
+        this.renderer.render(this.scene, this.camera);
     }
 }
