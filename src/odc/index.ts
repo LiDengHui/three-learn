@@ -1,19 +1,25 @@
-import { Camera, Color, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
-import { HelpFactory } from './utils/help-factory';
-import { BaseFactory } from './interface/base-factory';
-import { FloorFactory } from './elements/floor/floor-factory';
+import {AmbientLight, Camera, Color, DirectionalLight, Group, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
+import {HelpFactory} from "./utils/help-factory";
+import {BaseFactory} from "./interface/base-factory";
+import {WallFactory} from "./elements/wall/wall-factory";
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+import {floor} from "./data/buildings-data";
+import {WorkstationFactory} from "./elements/workstation/workstation-factory";
 
 export class ODC {
     scene: Scene;
     renderer: WebGLRenderer;
     camera: Camera;
     elements: BaseFactory[] = [];
+    controls: OrbitControls;
 
     constructor() {
         this.initScene();
         this.initCamera();
+        this.initLight();
         this.initRenderer();
         this.addElement();
+        this.initControl();
     }
 
     initCamera() {
@@ -29,16 +35,36 @@ export class ODC {
         this.scene = scene;
     }
 
+    initLight() {
+        const ambientLight = new AmbientLight(0x606060);
+        this.scene.add(ambientLight);
+
+        const directionalLight = new DirectionalLight(0xffffff);
+        directionalLight.position.set(1, 0.75, 0.5).normalize();
+        this.scene.add(directionalLight);
+    }
+
     initRenderer() {
-        const renderer = new WebGLRenderer({ antialias: true });
+        const renderer = new WebGLRenderer({antialias: true});
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
         this.renderer = renderer;
     }
 
+    initControl() {
+        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    }
+
     addElement() {
         this.elements.push(new HelpFactory(this.scene));
+        const group = new Group();
+        // group.translateX(-(floor.end.y - floor.begin.y) / 2);
+        // group.translateZ(-(floor.end.x - floor.begin.x) / 2);
+        this.elements.push(new WallFactory(group));
+        this.elements.push(new WorkstationFactory(group));
+        this.scene.add(group);
+
         this.elements.push(new FloorFactory(this.scene, this.render.bind(this)));
         // this.elements.push(new PlaneFactory(this.scene));
     }
@@ -48,6 +74,10 @@ export class ODC {
     }
 
     render() {
-        this.renderer.render(this.scene, this.camera);
+        this.controls.update();
+        this.renderer.render(this.scene, this.camera)
+        requestAnimationFrame(() => {
+            this.render();
+        })
     }
 }

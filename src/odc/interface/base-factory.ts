@@ -1,11 +1,10 @@
-import {Scene} from "three";
+import {Object3D} from "three";
 
 export class BaseFactory {
-    scene: Scene;
-    render: Function
-    constructor(scene: Scene, render?:Function) {
-        this.scene = scene;
-        this.render = render;
+    group: Object3D;
+
+    constructor(group: Object3D) {
+        this.group = group;
         this.init();
     }
 
