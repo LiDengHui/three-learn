@@ -3,8 +3,8 @@ import {Mesh, MeshLambertMaterial, PlaneGeometry, Scene} from "three";
 import {BaseFactory} from "../interface/base-factory";
 
 export class PlaneFactory extends BaseFactory {
-    constructor(scene: Scene) {
-        super(scene);
+    constructor(group: Scene) {
+        super(group);
     }
 
 
@@ -16,6 +16,6 @@ export class PlaneFactory extends BaseFactory {
         plane.rotation.x = -0.5 * Math.PI;
         plane.position.set(15, 0, 0);
         plane.receiveShadow = true;
-        this.scene.add(plane);
+        this.group.add(plane);
     }
 }

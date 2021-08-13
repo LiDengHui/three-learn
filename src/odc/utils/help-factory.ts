@@ -11,7 +11,7 @@ export class HelpFactory extends BaseFactory{
         // 坐标轴
         const axesHelper = new AxesHelper(100)
         axesHelper.position.set(0, 100, 0);
-        this.scene.add(axesHelper);
-        this.scene.add(new GridHelper(1000, 50));
+        this.group.add(axesHelper);
+        this.group.add(new GridHelper(2000, 100));
     }
 }
