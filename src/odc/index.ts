@@ -65,11 +65,12 @@ export class ODC {
         this.elements.push(new WorkstationFactory(group));
         this.scene.add(group);
 
+        this.elements.push(new FloorFactory(this.scene, this.render.bind(this)));
         // this.elements.push(new PlaneFactory(this.scene));
     }
 
     update() {
-        this.elements.forEach((element) => element.update())
+        this.elements.forEach((element) => element.update());
     }
 
     render() {
