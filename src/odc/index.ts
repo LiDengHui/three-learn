@@ -5,6 +5,8 @@ import {WallFactory} from "./elements/wall/wall-factory";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import {floor} from "./data/buildings-data";
 import {WorkstationFactory} from "./elements/workstation/workstation-factory";
+import {Workstation} from "./workstation";
+import {TableFactory} from "./table-factory";
 
 export class ODC {
     scene: Scene;
@@ -61,11 +63,14 @@ export class ODC {
         const group = new Group();
         // group.translateX(-(floor.end.y - floor.begin.y) / 2);
         // group.translateZ(-(floor.end.x - floor.begin.x) / 2);
-        this.elements.push(new WallFactory(group));
-        this.elements.push(new WorkstationFactory(group));
+        // this.elements.push(new WallFactory(group));
+        //this.elements.push(new WorkstationFactory(group));
+        this.elements.push(new Workstation(group))
+        this.elements.push(new TableFactory(group))
         this.scene.add(group);
 
-        this.elements.push(new FloorFactory(this.scene, this.render.bind(this)));
+
+        // this.elements.push(new FloorFactory(this.scene, this.render.bind(this)));
         // this.elements.push(new PlaneFactory(this.scene));
     }
 
