@@ -13,4 +13,8 @@ export class BaseFactory {
 
     update(): void {
     }
+
+    initEvent(): void {
+
+    }
 }

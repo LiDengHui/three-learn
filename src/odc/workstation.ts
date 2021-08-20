@@ -17,8 +17,8 @@ export class Workstation extends BaseFactory {
         dracoLoader.setDecoderPath( '/odc/' );
         loader.setDRACOLoader( dracoLoader );
         loader.load('/odc/odc.gltf', (obj: GLTF) => {
-            console.log(obj)
             this.group.add(obj.scene);
         })
     }
+
 }

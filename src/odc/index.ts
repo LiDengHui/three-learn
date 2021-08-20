@@ -24,8 +24,6 @@ export class ODC {
     camera: Camera;
     elements: BaseFactory[] = [];
     controls: OrbitControls;
-    mouse = new Vector2();
-    raycaster = new Raycaster();
 
     constructor() {
         this.initScene();
@@ -34,7 +32,6 @@ export class ODC {
         this.initRenderer();
         this.addElement();
         this.initControl();
-        this.initEvent();
     }
 
     initCamera() {
@@ -71,33 +68,6 @@ export class ODC {
         this.controls.target = new Vector3(57, -44, -258)
     }
 
-    initEvent() {
-
-
-        const onMouseMove = (event: MouseEvent) => {
-            this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-            this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-        }
-        const onClick = (event: MouseEvent) => {
-            this.raycaster.setFromCamera(this.mouse, this.camera);
-
-            // calculate objects intersecting the picking ray
-            const intersects = this.raycaster.intersectObjects(this.scene.children);
-
-            if (intersects.length > 0) {
-                const intersect = intersects[0];
-                intersect.object.dispatchEvent({
-                    type: 'click',
-                    event
-                });
-            }
-            window.addEventListener('mousemove', onMouseMove, false);
-            window.addEventListener('click', onClick, false);
-        }
-
-
-    }
-
     addElement() {
         this.elements.push(new HelpFactory(this.scene));
         const group = new Group();
@@ -106,9 +76,8 @@ export class ODC {
         // this.elements.push(new WallFactory(group));
         //this.elements.push(new WorkstationFactory(group));
         this.elements.push(new Workstation(group))
-        this.elements.push(new TableFactory(group))
+        this.elements.push(new TableFactory(group, this.camera))
         this.scene.add(group);
-
 
         // this.elements.push(new FloorFactory(this.scene, this.render.bind(this)));
         // this.elements.push(new PlaneFactory(this.scene));
@@ -125,6 +94,7 @@ export class ODC {
     render() {
         this.controls.update();
         this.renderer.render(this.scene, this.camera)
+        this.update();
         this.updateEvent();
         requestAnimationFrame(() => {
             this.render();
