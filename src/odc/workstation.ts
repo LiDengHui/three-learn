@@ -1,24 +1,25 @@
-import {BaseFactory} from "./interface/base-factory";
-import {AxesHelper, GridHelper, Object3D, Scene} from "three";
-import {GLTF, GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
-import {DRACOLoader} from "three/examples/jsm/loaders/DRACOLoader";
+import { BaseFactory } from './interface/base-factory';
+import { Object3D } from 'three';
+import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import { publicPath } from './utils/public-path';
 
 
 export class Workstation extends BaseFactory {
     static obj: Object3D;
 
     constructor(group: Object3D) {
-        super(group)
+        super(group);
     }
 
     init() {
-        const loader  =new GLTFLoader();
+        const loader = new GLTFLoader();
         const dracoLoader = new DRACOLoader();
-        dracoLoader.setDecoderPath( '/odc/' );
-        loader.setDRACOLoader( dracoLoader );
-        loader.load('/odc/odc.gltf', (obj: GLTF) => {
+        dracoLoader.setDecoderPath(publicPath('/odc/'));
+        loader.setDRACOLoader(dracoLoader);
+        loader.load(publicPath('/odc/odc.gltf'), (obj: GLTF) => {
             this.group.add(obj.scene);
-        })
+        });
     }
 
 }

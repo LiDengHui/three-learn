@@ -3,7 +3,6 @@
     "module": "CommonJS",
     "target": "esnext",
     "sourceMap": true,
-    "allowJs": true,
     "lib": [
       "esnext",
       "dom"
