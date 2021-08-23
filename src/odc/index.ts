@@ -3,47 +3,52 @@ import {
     Camera,
     Color,
     DirectionalLight,
-    Group, Object3D,
-    PerspectiveCamera, Raycaster,
-    Scene, Vector2,
+    Group,
+    PerspectiveCamera,
+    Scene,
+    Vector2,
     Vector3,
-    WebGLRenderer
+    WebGLRenderer,
 } from 'three';
-import {HelpFactory} from "./utils/help-factory";
-import {BaseFactory} from "./interface/base-factory";
-import {WallFactory} from "./elements/wall/wall-factory";
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-import {floor} from "./data/buildings-data";
-import {WorkstationFactory} from "./elements/workstation/workstation-factory";
-import {Workstation} from "./workstation";
-import {TableFactory} from "./table-factory";
+import { HelpFactory } from './utils/help-factory';
+import { BaseFactory } from './interface/base-factory';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { Workstation } from './workstation';
+import { TableFactory } from './table-factory';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
+import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass';
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
+import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader';
+
 
 export class ODC {
     scene: Scene;
-    renderer: WebGLRenderer;
     camera: Camera;
-    elements: BaseFactory[] = [];
     controls: OrbitControls;
+    renderer: WebGLRenderer;
+    elements: BaseFactory[] = [];
+    composer: EffectComposer;
+    outlinePass: OutlinePass;
 
     constructor() {
         this.initScene();
         this.initCamera();
         this.initLight();
         this.initRenderer();
-        this.addElement();
         this.initControl();
+        this.initComposer();
+        this.addElement();
     }
 
     initCamera() {
-        const camera = new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000);
-        camera.position.set(-301, 34, -273);
-        this.camera = camera;
+        this.camera = new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000);
+        this.camera.position.set(-301, 34, -273);
     }
 
     initScene() {
-        const scene = new Scene();
-        scene.background = new Color('#2b3a42');
-        this.scene = scene;
+        this.scene = new Scene();
+        this.scene.background = new Color('#2b3a42');
     }
 
     initLight() {
@@ -56,7 +61,7 @@ export class ODC {
     }
 
     initRenderer() {
-        const renderer = new WebGLRenderer({antialias: true});
+        const renderer = new WebGLRenderer({ antialias: true });
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
@@ -65,22 +70,15 @@ export class ODC {
 
     initControl() {
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-        this.controls.target = new Vector3(57, -44, -258)
+        this.controls.target = new Vector3(57, -44, -258);
     }
 
     addElement() {
         this.elements.push(new HelpFactory(this.scene));
         const group = new Group();
-        // group.translateX(-(floor.end.y - floor.begin.y) / 2);
-        // group.translateZ(-(floor.end.x - floor.begin.x) / 2);
-        // this.elements.push(new WallFactory(group));
-        //this.elements.push(new WorkstationFactory(group));
-        this.elements.push(new Workstation(group))
-        this.elements.push(new TableFactory(group, this.camera))
+        this.elements.push(new Workstation(group));
+        this.elements.push(new TableFactory(group, this));
         this.scene.add(group);
-
-        // this.elements.push(new FloorFactory(this.scene, this.render.bind(this)));
-        // this.elements.push(new PlaneFactory(this.scene));
     }
 
     update() {
@@ -91,13 +89,34 @@ export class ODC {
 
     }
 
+
     render() {
         this.controls.update();
-        this.renderer.render(this.scene, this.camera)
         this.update();
         this.updateEvent();
+        this.composer.render();
         requestAnimationFrame(() => {
             this.render();
-        })
+        });
+    }
+
+
+    private initComposer() {
+        this.composer = new EffectComposer(this.renderer);
+        const renderPass = new RenderPass(this.scene, this.camera);
+        this.composer.addPass(renderPass);
+        this.outlinePass = new OutlinePass(new Vector2(window.innerWidth, window.innerHeight), this.scene, this.camera);
+        this.outlinePass.edgeStrength = 3.0;
+        this.outlinePass.edgeGlow = 0.0;
+        this.outlinePass.edgeThickness = 2.0;
+        this.outlinePass.usePatternTexture = false;
+        this.outlinePass.visibleEdgeColor.set('#0000FF');
+        this.outlinePass.hiddenEdgeColor.set('#FF0000');
+        this.composer.addPass(this.outlinePass);
+        // TODO
+        // const effectFXAA = new ShaderPass(FXAAShader);
+        // effectFXAA.uniforms['resolution'].value.set(1 / window.innerWidth, 1 / window.innerHeight);
+
+        // this.composer.addPass(effectFXAA);
     }
 }

@@ -5,6 +5,8 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { arrayModifier } from './modifier/arrayModifier';
 import { isGroup } from './utils/is';
 import { publicPath } from './utils/public-path';
+import { ODC } from './index';
+import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass';
 
 
 export class TableFactory extends BaseFactory {
@@ -14,10 +16,12 @@ export class TableFactory extends BaseFactory {
     camera: Camera;
     actives: ClickObject3DType;
     nextActives: ClickObject3DType;
+    outlinePass: OutlinePass;
 
-    constructor(group: Object3D, camera: Camera) {
+    constructor(group: Object3D, context: ODC) {
         super(group);
-        this.camera = camera;
+        this.camera = context.camera;
+        this.outlinePass = context.outlinePass;
     }
 
     async load(): Promise<GLTF> {
@@ -73,6 +77,7 @@ export class TableFactory extends BaseFactory {
                 const obj: ClickObject3DType = getClickObj(intersect.object);
                 if (obj) {
                     this.nextActives = obj;
+                    this.outlinePass.selectedObjects = [obj.target];
                 }
             }
 
