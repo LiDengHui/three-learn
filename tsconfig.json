@@ -1,8 +1,15 @@
 {
-  "compilerOptions": {
-    "module": "CommonJS",
+  "compilerOptions":
+  {
+    "moduleSuffixes": [".js", ".ts", ""],
     "target": "esnext",
-    "sourceMap": true,
+    "module": "commonjs",
+    "allowJs": true,
+    //    "strict": true,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
     "lib": [
       "esnext",
       "dom"

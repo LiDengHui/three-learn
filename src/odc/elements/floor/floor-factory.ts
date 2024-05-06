@@ -3,8 +3,8 @@ import { Material, Mesh, MeshLambertMaterial, PlaneGeometry, RepeatWrapping, Sce
 import { floor } from '../../data/buildings-data';
 
 const { begin, end } = floor;
-const [beginX, beginY] = begin;
-const [endX, endY] = end;
+const {x: beginX, y: beginY} = begin;
+const [x: endX, y: endY] = end;
 
 const width = endX - beginX;
 const height = endY - beginY;
@@ -15,7 +15,7 @@ export class FloorFactory extends BaseFactory {
     material: Material;
     render: Function;
 
-    constructor(scene: Scene, render) {
+    constructor(scene: Scene, render: RenderingContext) {
         super(scene, render);
     }
 

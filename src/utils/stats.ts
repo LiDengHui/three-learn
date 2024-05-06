@@ -1,9 +1,8 @@
-import Stats from 'stats-js';
+import Stats from 'three/examples/jsm/libs/stats.module';
 
-export function initStates() {
-    const stats = new Stats();
-    stats.showPanel(0);
+export function initStates(type = 0) {
+    const stats = Stats();
+    stats.showPanel(type);
     document.body.appendChild(stats.dom);
-
     return stats;
 }

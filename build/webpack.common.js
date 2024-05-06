@@ -1,6 +1,10 @@
 const path = require('path');
 const glob = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+
+const ProvidePlugin = require('webpack/lib/ProvidePlugin');
+
 const entries = (function () {
     const entryFiles = glob.sync(
         path.join(__dirname, '../src/entries/') + '**/*.ts'
@@ -16,7 +20,6 @@ const entries = (function () {
 
     return map;
 })();
-console.log(entries);
 const htmlPlugins = Object.keys(entries).map((key) => {
     return new HtmlWebpackPlugin({
         title: key,
@@ -29,6 +32,7 @@ module.exports = {
     entry: entries,
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
+        alias: {},
     },
     module: {
         rules: [
@@ -54,13 +58,22 @@ module.exports = {
                 loader: 'file-loader',
                 options: { esModule: false },
             },
+            {
+                test: /\.glsl$/,
+                loader: 'raw-loader',
+            },
         ],
     },
-    plugins: [...htmlPlugins],
+    plugins: [
+        new webpack.ProvidePlugin({
+            THREE: 'three',
+            'window.THREE': 'three',
+        }),
+        ...htmlPlugins,
+    ],
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, '../dist'),
-        clean: true,
     },
     optimization: {
         splitChunks: {

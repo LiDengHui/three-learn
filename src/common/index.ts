@@ -1,31 +1,50 @@
 import * as THREE from 'three';
-export function common() {
+
+import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js';
+
+export function initGui() {
+    return new GUI();
+}
+
+interface Config {
+    axesHelper?: boolean;
+    gridHelper?: boolean;
+}
+
+export function common(config: Config = {}) {
     const scene = new THREE.Scene();
     const renderer = new THREE.WebGLRenderer();
-    renderer.setClearColor(new THREE.Color(0xeeeeee));
+    renderer.setClearColor(new THREE.Color(0x000000));
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    const dpr = window.devicePixelRatio;
+    renderer.setSize(window.innerWidth * dpr, window.innerHeight * dpr);
     renderer.shadowMap.enabled = true;
-
-    // const planeGeometry = new THREE.PlaneGeometry(60, 30);
-    // const planeMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
-    // const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-
-    // plane.rotation.x = -0.5 * Math.PI;
-    // plane.position.set(15, 0, 0);
-    // plane.receiveShadow = true;
-    // scene.add(plane);
-
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     const camera = new THREE.PerspectiveCamera(
-        60,
+        45,
         window.innerWidth / window.innerHeight,
         0.1,
         1000
     );
+
+    camera.position.copy(new THREE.Vector3(20, 20, 40));
+
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
+    if (config.axesHelper) {
+        const axesHelper = new THREE.AxesHelper(15);
+        scene.add(axesHelper);
+    }
+
+    if (config.gridHelper) {
+        scene.add(new THREE.GridHelper(100, 100));
+    }
+
+    const gui = initGui();
     return {
         scene,
         // plane,
         renderer,
         camera,
+        gui,
     };
 }

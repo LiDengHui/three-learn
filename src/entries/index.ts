@@ -27,7 +27,8 @@ const titles = {
     demo10: '方向光/太阳光',
     demo11: '半球光',
     demo12: '隧道跑车',
-    demo13: 'ODC'
+    demo13: 'ODC',
+    demo14: "Eath 地球"
 };
 document.body.innerHTML = `
         <ul>

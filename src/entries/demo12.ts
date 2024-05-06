@@ -29,7 +29,7 @@ obgLoader.load('/obj/car/file.obj', (obj: THREE.Object3D) => {
     console.log(obj);
     car = obj;
     obj.scale.setScalar(0.004);
-    console.log(obj.position.x0);
+    console.log(obj.position.x);
     obj.position.y = 3.9;
     obj.position.z = -100;
 
