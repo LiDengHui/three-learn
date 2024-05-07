@@ -8,11 +8,12 @@ module.exports = merge(common, {
         new CopyPlugin({
             patterns: [
                 {
-                    from: 'public', to: publicPath,
+                    from: 'public',
+                    to: publicPath,
                     globOptions: {
                         dot: true,
                         gitignore: true,
-                        ignore: ['**/*.blend', '**/*.blend1'],
+                        ignore: ['**/*.blend', '**/*.blend1', '**/*.js'],
                     },
                 },
             ],
