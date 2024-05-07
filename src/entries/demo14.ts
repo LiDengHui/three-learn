@@ -6,6 +6,7 @@ import { initDefaultLighting } from '../utils/lighting';
 import { Controls } from '../earth/controls';
 import { addEarth } from '../earth/earth';
 import { addPoints } from '../earth/addPoints';
+import { resource } from '../utils/resource';
 
 const textureLoader = new THREE.TextureLoader();
 const commonObj = common({
@@ -13,7 +14,7 @@ const commonObj = common({
 });
 
 commonObj.scene.background = textureLoader.load(
-    './assets/textures/bg/starry-deep-outer-space-galaxy.jpg'
+    resource('assets/textures/bg/starry-deep-outer-space-galaxy.jpg')
 );
 const stats = initStates();
 

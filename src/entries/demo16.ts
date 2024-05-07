@@ -3,6 +3,7 @@ import { initOrbitControls } from '../utils/controls';
 import * as THREE from 'three';
 import { initDefaultLighting } from '../utils/lighting';
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
+import { resource } from '../utils/resource';
 
 const commonObj = common({
     axesHelper: true,
@@ -44,7 +45,7 @@ for (let i = 0; i < 100; i++) {
 
 const mergedGeometry = BufferGeometryUtils.mergeGeometries(geometries, false);
 const texture = new THREE.TextureLoader().load(
-    '/assets/textures/house/house.jpg'
+    resource('assets/textures/house/house.jpg')
 );
 texture.wrapS = texture.wrapT = THREE.MirroredRepeatWrapping;
 const material = new THREE.MeshStandardMaterial({

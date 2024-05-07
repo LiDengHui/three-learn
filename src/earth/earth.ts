@@ -6,6 +6,7 @@ import {
     addBasicMaterialSettings,
     addSpecificMaterialSettings,
 } from './material';
+import { resource } from '../utils/resource';
 
 export function addEarth(
     commonObj: ReturnType<typeof common>,
@@ -14,9 +15,13 @@ export function addEarth(
     const textureLoader = new THREE.TextureLoader();
 
     const earthMaterial = new THREE.MeshPhongMaterial({
-        map: textureLoader.load('/assets/textures/earth/Earth.png'),
-        normalMap: textureLoader.load('assets/textures/earth/EarthNormal.png'),
-        specularMap: textureLoader.load('assets/textures/earth/EarthSpec.png'),
+        map: textureLoader.load(resource('assets/textures/earth/Earth.png')),
+        normalMap: textureLoader.load(
+            resource('assets/textures/earth/EarthNormal.png')
+        ),
+        specularMap: textureLoader.load(
+            resource('assets/textures/earth/EarthSpec.png')
+        ),
         normalScale: new THREE.Vector2(6, 6),
     });
 
