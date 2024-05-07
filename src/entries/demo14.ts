@@ -5,8 +5,6 @@ import { initTrackballControls } from '../utils/controls';
 import { initDefaultLighting } from '../utils/lighting';
 import { Controls } from '../earth/controls';
 import { addEarth } from '../earth/earth';
-import { addRing } from '../earth/ring';
-import { addLine } from '../earth/line';
 import { addPoints } from '../earth/addPoints';
 
 const textureLoader = new THREE.TextureLoader();

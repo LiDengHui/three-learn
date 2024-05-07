@@ -28,7 +28,6 @@ export function common(config: Config = {}) {
     );
 
     camera.position.copy(new THREE.Vector3(20, 20, 40));
-
     camera.lookAt(new THREE.Vector3(0, 0, 0));
     if (config.axesHelper) {
         const axesHelper = new THREE.AxesHelper(15);
@@ -42,7 +41,6 @@ export function common(config: Config = {}) {
     const gui = initGui();
     return {
         scene,
-        // plane,
         renderer,
         camera,
         gui,

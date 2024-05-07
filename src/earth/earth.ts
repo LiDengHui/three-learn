@@ -1,7 +1,7 @@
 import { common } from '../common';
 import { Controls } from './controls';
 import * as THREE from 'three';
-import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
+import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js';
 import {
     addBasicMaterialSettings,
     addSpecificMaterialSettings,

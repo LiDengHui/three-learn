@@ -1,6 +1,7 @@
-import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
+import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js';
 import { Controls } from './controls';
 import * as THREE from 'three';
+import { Side } from 'three';
 
 export function addBasicMaterialSettings(
     gui: GUI,
@@ -24,8 +25,8 @@ export function addBasicMaterialSettings(
             BackSide: 1,
             BothSides: 2,
         })
-        .onChange(function (side: string) {
-            controls.material.side = parseInt(side);
+        .onChange((side) => {
+            controls.material.side = side;
         });
 
     folder.add(controls.material, 'colorWrite');
@@ -43,13 +44,9 @@ export function addBasicMaterialSettings(
         BothSides: 2,
     });
     folder
-        .add(controls.material, 'vertexColors', {
-            NoColors: THREE.NoColors,
-            FaceColors: THREE.FaceColors,
-            VertexColors: THREE.VertexColors,
-        })
-        .onChange(function (vertexColors: string) {
-            material.vertexColors = parseInt(vertexColors);
+        .add(controls.material, 'vertexColors', {})
+        .onChange((vertexColors) => {
+            material.vertexColors = vertexColors;
         });
     folder.add(controls.material, 'fog');
 
@@ -79,15 +76,15 @@ export function addSpecificMaterialSettings(
 
         case 'MeshStandardMaterial':
             controls.color = material.color.getStyle();
-            folder.addColor(controls, 'color').onChange(function (e) {
+            folder.addColor(controls, 'color').onChange(function (e: string) {
                 material.color.setStyle(e);
             });
             controls.emissive = material.emissive.getStyle();
             folder.addColor(controls, 'emissive').onChange(function (e) {
                 material.emissive.setStyle(e);
             });
-            folder.add(material, 'metalness', 0, 1, 0.01);
-            folder.add(material, 'roughness', 0, 1, 0.01);
+            // folder.add(material, 'metalness', 0, 1, 0.01);
+            // folder.add(material, 'roughness', 0, 1, 0.01);
             folder.add(material, 'wireframe');
 
             return folder;

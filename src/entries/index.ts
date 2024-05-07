@@ -1,8 +1,8 @@
 // @ts-expect-error
 const componentsContext = require.context('./', true, /.ts$/);
-const maps = [];
+const maps: string[] = [];
 
-componentsContext.keys().forEach((filePath) => {
+componentsContext.keys().forEach((filePath: string) => {
     // 获取文件中的 default 模块
     const filename = filePath.replace(
         /.\/(\w+)(\.html|\.ts)$/,
@@ -14,7 +14,7 @@ componentsContext.keys().forEach((filePath) => {
     }
 });
 
-const titles = {
+const titles: Record<string, string> = {
     demo01: '基础图形',
     demo02: '增加物体',
     demo03: '雾化',
@@ -28,7 +28,11 @@ const titles = {
     demo11: '半球光',
     demo12: '隧道跑车',
     demo13: 'ODC',
-    demo14: "Eath 地球"
+    demo14: 'Eath 地球',
+    demo15: '雷达图',
+    demo16: '雷达扩散图',
+    demo17: '雷达扫描图',
+    demo18: '对图勾勒',
 };
 document.body.innerHTML = `
         <ul>
