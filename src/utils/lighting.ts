@@ -6,7 +6,7 @@ export function initDefaultLighting(
     const directionalLight = new THREE.DirectionalLight(0xffffff);
     scene.add(directionalLight);
 
-    const ambientLight = new THREE.AmbientLight(0x343434);
+    const ambientLight = new THREE.AmbientLight(0xcccccc);
     ambientLight.name = 'ambientLight';
     scene.add(ambientLight);
 }

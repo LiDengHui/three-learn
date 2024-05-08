@@ -32,7 +32,7 @@ const titles: Record<string, string> = {
     demo15: '雷达图',
     demo16: '雷达扩散图',
     demo17: '雷达扫描图',
-    demo18: '对图勾勒',
+    demo18: '地图勾勒',
 };
 document.body.innerHTML = `
         <ul>

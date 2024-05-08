@@ -16,15 +16,15 @@ export function common(config: Config = {}) {
     const renderer = new THREE.WebGLRenderer();
     renderer.setClearColor(new THREE.Color(0x000000));
 
-    const dpr = window.devicePixelRatio;
-    renderer.setSize(window.innerWidth * dpr, window.innerHeight * dpr);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     const camera = new THREE.PerspectiveCamera(
         45,
         window.innerWidth / window.innerHeight,
-        0.1,
-        1000
+        1,
+        2000
     );
 
     camera.position.copy(new THREE.Vector3(20, 20, 40));

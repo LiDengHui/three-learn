@@ -41,16 +41,11 @@ export function addLine(
         fragmentShader: fragmentShaderCode,
         blending: THREE.AdditiveBlending,
         uniforms: {
-            amplitude: { value: 5.0 },
-            opacity: { value: 0.3 },
             u_color: {
                 value: new THREE.Color('#4bd3ec'),
             },
-            u_step: {
+            u_time: {
                 value: 0.0,
-            },
-            u_pointer: {
-                value: v0.clone(),
             },
         },
     });
@@ -66,15 +61,7 @@ export function addLine(
         lineMesh: mesh,
         shaderMaterial,
         update(delta: number) {
-            shaderMaterial.uniforms.u_step.value += delta / 10 + 0.005;
-
-            if (shaderMaterial.uniforms.u_step.value >= 1) {
-                shaderMaterial.uniforms.u_step.value = 0.0;
-            }
-
-            shaderMaterial.uniforms.u_pointer.value = curve.getPoint(
-                shaderMaterial.uniforms.u_step.value
-            );
+            shaderMaterial.uniforms.u_time.value += delta / 2;
         },
     };
 }
