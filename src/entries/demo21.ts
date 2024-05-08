@@ -134,8 +134,8 @@ async function addRegion(updates: UpdateFn[]) {
             void main(void)
             {
                 vUv = uv;
-                float h =texture2D(map, uv).a*uHeight;
-                gl_Position = projectionMatrix * modelViewMatrix * vec4( position.x,position.y,h, 1.0 );
+                float h = texture2D(map, uv).a * uHeight;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position.xy, h, 1.0 );
             }`,
         fragmentShader: `
             precision mediump float;
@@ -143,10 +143,9 @@ async function addRegion(updates: UpdateFn[]) {
             uniform float uOpacity;
             varying vec2 vUv;
             void main (void) {
-                vec4 color= texture2D(map, vUv);
-                float a=color.a*uOpacity;
-                gl_FragColor.rgb =color.rgb;
-                gl_FragColor.a=a;
+                vec4 color = texture2D(map, vUv);
+                float a = color.a * uOpacity;
+                gl_FragColor = vec4(color.rgb, a);
             }`,
     });
     const plane = new THREE.Mesh(geometry, material);
