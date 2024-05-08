@@ -106,6 +106,9 @@ function createLine(shape: THREE.Shape, updates: UpdateFn[]) {
         transparent: true,
         depthTest: false,
         uniforms: {
+            u_time: {
+                value: 0.1,
+            },
             color1: { value: new THREE.Color('#00FFFF') },
         },
         vertexShader: `
@@ -117,14 +120,16 @@ function createLine(shape: THREE.Shape, updates: UpdateFn[]) {
                 gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
             }`,
         fragmentShader: `
-            uniform vec3 color1;                
+            uniform vec3 color1;   
+            uniform float u_time;              
             varying vec2 vUv; 
             varying vec3 vNormal;
             void main() {
                 if(vNormal.z==1.0||vNormal.z==-1.0||vUv.y ==0.0){
                     discard;
                 } else{
-                    gl_FragColor =vec4(color1,mix(1.0,0.0, vUv.y)) ;
+                   
+                    gl_FragColor =vec4(color1,1.0 - fract((vUv.y - u_time) * 3.0) ) ;
                 } 
             }`,
     });
@@ -132,5 +137,9 @@ function createLine(shape: THREE.Shape, updates: UpdateFn[]) {
     const mesh = new THREE.Mesh(geometry, material);
     mesh.rotateX(Math.PI * 0.5);
     mesh.position.y = extrudeSettings.depth + 0.1;
+
+    updates.push((delta) => {
+        material.uniforms.u_time.value += delta / 5;
+    });
     return mesh;
 }

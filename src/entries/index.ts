@@ -33,6 +33,9 @@ const titles: Record<string, string> = {
     demo16: '雷达扩散图',
     demo17: '雷达扫描图',
     demo18: '地图勾勒',
+    demo19: '地图围栏',
+    demo20: '地图动态围栏',
+    demo21: '热力图',
 };
 document.body.innerHTML = `
         <ul>
