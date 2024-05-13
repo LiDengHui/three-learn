@@ -13,7 +13,9 @@ interface Config {
 
 export function common(config: Config = {}) {
     const scene = new THREE.Scene();
-    const renderer = new THREE.WebGLRenderer();
+    const renderer = new THREE.WebGLRenderer({
+        logarithmicDepthBuffer: true,
+    });
     renderer.setClearColor(new THREE.Color(0x000000));
 
     renderer.setPixelRatio(window.devicePixelRatio);

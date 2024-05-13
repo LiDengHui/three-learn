@@ -24,6 +24,7 @@
     "main": "src/index.ts",
     "name": "draw",
     "scripts": {
+        "dev": "webpack serve --open --config ./build/webpack.dev.js",
         "start": "webpack serve --open --config ./build/webpack.dev.js",
         "build": "webpack --config ./build/webpack.prod.js",
         "publish": "node ./script/publish",

@@ -35,7 +35,10 @@ module.exports = {
         alias: {},
     },
     devServer: {
+        hot: false,
+        injectClient: false,
         disableHostCheck: true,
+        https: true,
         public: 'http://127.0.0.1:3333',
         port: 3333,
         host: '0.0.0.0',
