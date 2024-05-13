@@ -44,6 +44,7 @@ module.exports = {
         host: '0.0.0.0',
         proxy: {
             '/api': 'http://47.109.70.11::3000',
+            '/_next': 'http://47.109.70.11::3002',
         },
     },
     module: {
