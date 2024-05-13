@@ -35,10 +35,12 @@ module.exports = {
         alias: {},
     },
     devServer: {
-        host: 'pinia.work',
-        port: '8080',
+        disableHostCheck: true,
+        public: 'http://127.0.0.1:3333',
+        port: 3333,
+        host: '0.0.0.0',
         proxy: {
-            '/api': 'http://localhost:3000',
+            '/api': 'http://47.109.70.11::3000',
         },
     },
     module: {
