@@ -2,8 +2,8 @@ const path = require('path');
 const glob = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-
-const ProvidePlugin = require('webpack/lib/ProvidePlugin');
+const ModuleFederationPlugin =
+    require('@module-federation/enhanced').ModuleFederationPlugin;
 
 const entries = (function () {
     const entryFiles = glob.sync(
@@ -33,6 +33,11 @@ module.exports = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
         alias: {},
+    },
+    devServer: {
+        proxy: {
+            '/api': 'http://localhost:3000',
+        },
     },
     module: {
         rules: [
@@ -65,6 +70,13 @@ module.exports = {
         ],
     },
     plugins: [
+        new ModuleFederationPlugin({
+            name: 'three',
+            remotes: {
+                shop: 'shop@http://localhost:3002/_next/static/chunks/remoteEntry.js',
+            },
+            shared: { react: 'react' },
+        }),
         new webpack.ProvidePlugin({
             THREE: 'three',
             'window.THREE': 'three',

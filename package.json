@@ -31,6 +31,8 @@
     },
     "version": "1.0.0",
     "dependencies": {
+        "@module-federation/enhanced": "^0.1.12",
+        "@module-federation/runtime": "^0.1.12",
         "@types/node": "^20.12.7",
         "d3-geo": "^3.1.1",
         "expose-loader": "^5.0.0",
@@ -38,6 +40,7 @@
         "path-browserify": "^1.0.1",
         "prettier": "^3.2.5",
         "raw-loader": "^4.0.2",
+        "react": "^18.3.1",
         "stats-js": "^1.0.1",
         "tern": "^0.24.3",
         "three": "^0.164.1"

@@ -7,6 +7,7 @@ import { Controls } from '../earth/controls';
 import { addEarth } from '../earth/earth';
 import { addPoints } from '../earth/addPoints';
 import { resource } from '../utils/resource';
+import { init, loadRemote } from '@module-federation/runtime';
 
 const textureLoader = new THREE.TextureLoader();
 const commonObj = common({
@@ -51,3 +52,26 @@ function render() {
 }
 
 render();
+
+// let script = document.createElement('script');
+//
+// script.src = 'http://localhost:3002/_next/static/chunks/remoteEntry.js';
+//
+// document.body.appendChild(script);
+
+const remotes = () => {
+    return [
+        {
+            name: 'shop',
+            entry: `http://localhost:3002/_next/static/chunks/remoteEntry.js`,
+        },
+    ];
+};
+
+init({
+    name: 'tree',
+    remotes: remotes(),
+    // force: true
+});
+
+loadRemote('shop/mounted');
