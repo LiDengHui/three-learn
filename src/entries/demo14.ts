@@ -63,7 +63,7 @@ const remotes = () => {
     return [
         {
             name: 'shop',
-            entry: `http://localhost:3002/_next/static/chunks/remoteEntry.js`,
+            entry: `http://47.109.70.11:3002/_next/static/chunks/remoteEntry.js`,
         },
     ];
 };
