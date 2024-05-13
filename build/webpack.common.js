@@ -35,8 +35,12 @@ module.exports = {
         alias: {},
     },
     devServer: {
-        cert: fs.readFileSync(path.resolve(process.cwd(), 'ssl', 'server.crt')),
-        key: fs.readFileSync(path.resolve(process.cwd(), 'ssl', 'server.key')),
+        cert: fs.readFileSync(
+            path.resolve(process.cwd(), 'ssl', 'pinia.work_bundle.crt')
+        ),
+        key: fs.readFileSync(
+            path.resolve(process.cwd(), 'ssl', 'pinia.work.key')
+        ),
         hot: false,
         injectClient: false,
         disableHostCheck: true,
