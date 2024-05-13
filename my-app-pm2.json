@@ -1,0 +1,9 @@
+{
+  "apps": [
+    {
+      "name": "three-learn",
+      "script": "npm",
+      "args" : "start"
+    }
+  ]
+}
