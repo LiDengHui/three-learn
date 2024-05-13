@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const ModuleFederationPlugin =
     require('@module-federation/enhanced').ModuleFederationPlugin;
-
+const fs = require('fs');
 const entries = (function () {
     const entryFiles = glob.sync(
         path.join(__dirname, '../src/entries/') + '**/*.ts'
@@ -35,6 +35,8 @@ module.exports = {
         alias: {},
     },
     devServer: {
+        cert: fs.readFileSync(path.resolve(process.cwd(), 'ssl', 'server.crt')),
+        key: fs.readFileSync(path.resolve(process.cwd(), 'ssl', 'server.key')),
         hot: false,
         injectClient: false,
         disableHostCheck: true,
