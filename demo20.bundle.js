@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunkdraw=self.webpackChunkdraw||[]).push([[74],{},s=>{var a=a=>s(s.s=a);s.O(0,[121,76],(()=>(a(5514),a(444)))),s.O()}]);
+"use strict";(self.webpackChunkdraw=self.webpackChunkdraw||[]).push([[74],{},s=>{s.O(0,[121,76],(()=>s(s.s=1815))),s.O()}]);

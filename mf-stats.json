@@ -1,0 +1,39 @@
+{
+  "id": "three",
+  "name": "three",
+  "metaData": {
+    "name": "three",
+    "type": "app",
+    "buildInfo": {
+      "buildVersion": "1.0.0",
+      "buildName": "draw"
+    },
+    "remoteEntry": {
+      "name": "",
+      "path": "",
+      "type": "global"
+    },
+    "types": {
+      "path": "",
+      "name": "",
+      "zip": ".",
+      "api": "."
+    },
+    "globalName": "three",
+    "pluginVersion": "0.15.0",
+    "prefetchInterface": false,
+    "publicPath": "/there-learn"
+  },
+  "shared": [],
+  "remotes": [
+    {
+      "entry": "http://localhost:3002/_next/static/chunks/remoteEntry.js",
+      "alias": "shop",
+      "moduleName": "UNKNOWN",
+      "federationContainerName": "shop",
+      "consumingFederationContainerName": "three",
+      "usedIn": []
+    }
+  ],
+  "exposes": []
+}
