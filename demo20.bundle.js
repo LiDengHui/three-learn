@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunkdraw=self.webpackChunkdraw||[]).push([[74],{},s=>{s.O(0,[121,76],(()=>s(s.s=1815))),s.O()}]);
+"use strict";(self.webpackChunkthree_learn=self.webpackChunkthree_learn||[]).push([[74],{},e=>{e.O(0,[121,76],(()=>e(e.s=1815))),e.O()}]);
