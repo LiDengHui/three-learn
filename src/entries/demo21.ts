@@ -39,7 +39,7 @@ function render() {
 render();
 
 async function getHeatmap() {
-    let res = await getData(resource('assets/textures/guangzhou/traffic.json'));
+    let res = await getData(resource('/assets/textures/guangzhou/traffic.json'));
     let info = {
         max: Number.MIN_SAFE_INTEGER,
         min: Number.MAX_SAFE_INTEGER,

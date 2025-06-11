@@ -1,4 +1,4 @@
-let publicPath = 'three-learn';
+let publicPath = './';
 if (process.env.NODE_ENV === 'development') {
     publicPath = './';
 }

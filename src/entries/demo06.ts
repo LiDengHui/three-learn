@@ -102,15 +102,14 @@ var controls = new (function () {
 //     controls.switchCamera();
 // }, 2000);
 document.onkeydown = function (event) {
-    switch (event.keyCode) {
-        case 37:
+    switch (event.key) {
+        case "Left Arrow":
             camera.rotation.y += 0.02;
             break;
-        case 39:
+        case "Right Arrow":
             camera.rotation.y -= 0.02;
             break;
     }
-
     render();
 };
 function render() {

@@ -36,13 +36,15 @@ const titles: Record<string, string> = {
     demo19: '地图围栏',
     demo20: '地图动态围栏',
     demo21: '热力图',
+    demo23: '流光',
+    demo24: 'ShadertoyMaterial'
 };
 document.body.innerHTML = `
         <ul>
             ${maps
                 .map(
                     (filename) =>
-                        `<li><a href="${'./' + filename + '.html'}">
+                        `<li><a href="${'./three-learn/' + filename + '.html'}">
                         ${filename + ' ' + (titles[filename] || '')}
                         </a></li>`
                 )

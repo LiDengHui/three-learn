@@ -1,7 +1,9 @@
 import * as THREE from 'three';
+import { Camera, Material, Mesh, Scene, WebGLRenderer } from 'three';
+import { BufferGeometry } from 'three/src/core/BufferGeometry';
 
-let camera, scene, renderer;
-let geometry, material, mesh;
+let camera: Camera, scene: Scene, renderer: WebGLRenderer;
+let geometry: BufferGeometry , material: Material, mesh: Mesh;
 
 init();
 
@@ -28,7 +30,7 @@ function init() {
     document.body.appendChild(renderer.domElement);
 }
 
-function animation(time) {
+function animation(time: number) {
     mesh.rotation.x = time / 2000;
     mesh.rotation.y = time / 1000;
 

@@ -4,7 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export function initTrackballControls(
     camera: THREE.Camera,
-    renderer: THREE.Renderer
+    renderer: THREE.WebGLRenderer
 ) {
     const trackballControls = new TrackballControls(
         camera,
@@ -24,7 +24,7 @@ export function initTrackballControls(
 
 export function initOrbitControls(
     camera: THREE.Camera,
-    renderer: THREE.Renderer
+    renderer: THREE.WebGLRenderer
 ) {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;

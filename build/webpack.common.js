@@ -34,25 +34,6 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js'],
         alias: {},
     },
-    devServer: {
-        cert: fs.readFileSync(
-            path.resolve(process.cwd(), 'ssl', 'pinia.work_bundle.crt')
-        ),
-        key: fs.readFileSync(
-            path.resolve(process.cwd(), 'ssl', 'pinia.work.key')
-        ),
-        hot: false,
-        injectClient: false,
-        disableHostCheck: true,
-        https: true,
-        public: 'http://127.0.0.1:3333',
-        port: 3333,
-        host: '0.0.0.0',
-        proxy: {
-            '/api': 'http://47.109.70.11:3000',
-            '/_next': 'http://47.109.70.11:3002',
-        },
-    },
     module: {
         rules: [
             {
@@ -84,13 +65,13 @@ module.exports = {
         ],
     },
     plugins: [
-        new ModuleFederationPlugin({
-            name: 'three',
-            remotes: {
-                shop: 'shop@http://localhost:3002/_next/static/chunks/remoteEntry.js',
-            },
-            shared: { react: 'react' },
-        }),
+        // new ModuleFederationPlugin({
+        //     name: 'three',
+        //     remotes: {
+        //         shop: 'shop@http://localhost:3002/_next/static/chunks/remoteEntry.js',
+        //     },
+        //     shared: { react: 'react' },
+        // }),
         new webpack.ProvidePlugin({
             THREE: 'three',
             'window.THREE': 'three',
@@ -100,6 +81,7 @@ module.exports = {
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, '../dist'),
+        publicPath: '/three-learn'
     },
     optimization: {
         splitChunks: {
