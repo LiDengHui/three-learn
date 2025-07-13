@@ -44,7 +44,7 @@ document.body.innerHTML = `
             ${maps
                 .map(
                     (filename) =>
-                        `<li><a href="${'./three-learn/' + filename + '.html'}">
+                        `<li><a href="${'./' + filename + '.html'}">
                         ${filename + ' ' + (titles[filename] || '')}
                         </a></li>`
                 )

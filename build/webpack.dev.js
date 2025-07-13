@@ -6,12 +6,16 @@ module.exports = merge(common, {
     devtool: 'inline-source-map',
     plugins: [
         new webpack.LoaderOptionsPlugin({
-            // test: /\.xxx$/, // may apply this only for some modules
             options: {
                 publicPath: '/three-learn',
             },
         }),
 
     ],
-    devServer: {},
+    devServer: {
+        open: ['/three-learn/index.html'],
+        static: {
+            publicPath: '/three-learn',
+        },
+    },
 });
