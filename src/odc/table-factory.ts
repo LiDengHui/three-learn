@@ -1,5 +1,16 @@
 import { BaseFactory } from './interface/base-factory';
-import { Camera, Color, Group, Material, Mesh, MeshPhongMaterial, Object3D, Raycaster, TextureLoader } from 'three';
+import {
+    Camera,
+    Color,
+    Group,
+    Material,
+    Mesh,
+    MeshPhongMaterial,
+    Object3D,
+    Raycaster,
+    TextureLoader,
+    Vector2,
+} from 'three';
 import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { arrayModifier } from './modifier/arrayModifier';
@@ -7,7 +18,6 @@ import { isGroup } from './utils/is';
 import { publicPath } from './utils/public-path';
 import { ODC } from './index';
 import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass';
-
 
 export class TableFactory extends BaseFactory {
     gltf: GLTF;
@@ -27,16 +37,19 @@ export class TableFactory extends BaseFactory {
     async load(): Promise<GLTF> {
         const loader = new GLTFLoader();
         const dracoLoader = new DRACOLoader();
-        dracoLoader.setDecoderPath(publicPath('/odc/'));
         loader.setDRACOLoader(dracoLoader);
-        return new Promise(((resolve, reject) => {
-            loader.load(publicPath('/odc/table.gltf'), (gltf: GLTF) => {
-                resolve(gltf);
-            }, () => {
-            }, (err: ErrorEvent) => {
-                reject(err);
-            });
-        }));
+        return new Promise((resolve, reject) => {
+            loader.load(
+                publicPath('/odc/table.gltf'),
+                (gltf: GLTF) => {
+                    resolve(gltf);
+                },
+                () => {},
+                (err: ErrorEvent) => {
+                    reject(err);
+                }
+            );
+        });
     }
 
     async init() {
@@ -70,8 +83,11 @@ export class TableFactory extends BaseFactory {
         const onClick = (event: MouseEvent) => {
             const x = (event.clientX / window.innerWidth) * 2 - 1;
             const y = -(event.clientY / window.innerHeight) * 2 + 1;
-            this.raycaster.setFromCamera({ x, y }, this.camera);
-            const intersects = this.raycaster.intersectObject(this.targetGroup, true);
+            this.raycaster.setFromCamera(new Vector2(x, y), this.camera);
+            const intersects = this.raycaster.intersectObject(
+                this.targetGroup,
+                true
+            );
             if (intersects.length > 0) {
                 const intersect = intersects[0];
                 const obj: ClickObject3DType = getClickObj(intersect.object);
@@ -80,7 +96,6 @@ export class TableFactory extends BaseFactory {
                     this.outlinePass.selectedObjects = [obj.target];
                 }
             }
-
         };
         window.addEventListener('click', onClick, false);
     }
@@ -95,18 +110,17 @@ export class TableFactory extends BaseFactory {
             this.actives = this.nextActives;
         }
     }
-
 }
 
 enum ClickType {
-    Monitor
+    Monitor,
 }
 
 interface ClickObject3DType {
-    clickType: ClickType,
-    target: Object3D,
-    active?: Function,
-    resetActive?: Function
+    clickType: ClickType;
+    target: Object3D;
+    active?: Function;
+    resetActive?: Function;
 }
 
 const cacheMesh = new Map<Mesh, { rootMaterial: Material | Material[] }>();
@@ -152,7 +166,9 @@ function getClickObj(child: Object3D): ClickObject3DType {
     return null;
 
     function isMonitor(obj: Object3D) {
-        return (obj.name === 'monitor' || obj.name === 'monitor001') && isGroup(obj);
+        return (
+            (obj.name === 'monitor' || obj.name === 'monitor001') &&
+            isGroup(obj)
+        );
     }
 }
-

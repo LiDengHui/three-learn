@@ -21,7 +21,6 @@ import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
 import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader';
 
-
 export class ODC {
     scene: Scene;
     camera: Camera;
@@ -42,7 +41,12 @@ export class ODC {
     }
 
     initCamera() {
-        this.camera = new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000);
+        this.camera = new PerspectiveCamera(
+            60,
+            window.innerWidth / window.innerHeight,
+            1,
+            10000
+        );
         this.camera.position.set(-301, 34, -273);
     }
 
@@ -52,7 +56,7 @@ export class ODC {
     }
 
     initLight() {
-        const ambientLight = new AmbientLight(0x606060);
+        const ambientLight = new AmbientLight(0xffffff);
         this.scene.add(ambientLight);
 
         const directionalLight = new DirectionalLight(0xffffff);
@@ -69,7 +73,10 @@ export class ODC {
     }
 
     initControl() {
-        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+        this.controls = new OrbitControls(
+            this.camera,
+            this.renderer.domElement
+        );
         this.controls.target = new Vector3(57, -44, -258);
     }
 
@@ -85,10 +92,7 @@ export class ODC {
         this.elements.forEach((element) => element.update());
     }
 
-    updateEvent() {
-
-    }
-
+    updateEvent() {}
 
     render() {
         this.controls.update();
@@ -100,12 +104,15 @@ export class ODC {
         });
     }
 
-
     private initComposer() {
         this.composer = new EffectComposer(this.renderer);
         const renderPass = new RenderPass(this.scene, this.camera);
         this.composer.addPass(renderPass);
-        this.outlinePass = new OutlinePass(new Vector2(window.innerWidth, window.innerHeight), this.scene, this.camera);
+        this.outlinePass = new OutlinePass(
+            new Vector2(window.innerWidth, window.innerHeight),
+            this.scene,
+            this.camera
+        );
         this.outlinePass.edgeStrength = 3.0;
         this.outlinePass.edgeGlow = 0.0;
         this.outlinePass.edgeThickness = 2.0;

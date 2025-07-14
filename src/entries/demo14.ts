@@ -59,19 +59,19 @@ render();
 //
 // document.body.appendChild(script);
 
-const remotes = () => {
-    return [
-        {
-            name: 'shop',
-            entry: `/_next/static/chunks/remoteEntry.js`,
-        },
-    ];
-};
-
-init({
-    name: 'tree',
-    remotes: remotes(),
-    // force: true
-});
-
-loadRemote('shop/mounted');
+// const remotes = () => {
+//     return [
+//         {
+//             name: 'shop',
+//             entry: `/_next/static/chunks/remoteEntry.js`,
+//         },
+//     ];
+// };
+//
+// init({
+//     name: 'tree',
+//     remotes: remotes(),
+//     // force: true
+// });
+//
+// loadRemote('shop/mounted');

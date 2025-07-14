@@ -1,1 +1,1 @@
-export const publicPath = '';
+export const publicPath = '/three-learn';

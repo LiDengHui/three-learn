@@ -2,5 +2,7 @@ import config from '../config';
 import path from 'path-browserify';
 
 export function publicPath(url: string) {
-    return path.join(config.publicPath, url);
+    const result = path.join(config.publicPath, url);
+    console.log(result);
+    return result;
 }
